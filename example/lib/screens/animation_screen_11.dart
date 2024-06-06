@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AnimationScreen11 extends StatelessWidget {
+  const AnimationScreen11({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: ListView(
-          children: [_Animation()],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Animation 10'),
+      ),
+      body: ListView(
+        children: [_Animation()],
       ),
     );
   }
@@ -33,11 +32,11 @@ class _Animation extends StatelessWidget {
           ),
           ValueDelegate.opacity(
             const ['Shape Layer 1', 'Rectangle'],
-            callback: (frameInfo) => (frameInfo.overallProgress * 100).round(),
+            callback: (frameInfo) => (frameInfo.overallProgress * 10).round(),
           ),
           ValueDelegate.position(
             const ['Shape Layer 1', 'Rectangle', '**'],
-            relative: const Offset(100, 200),
+            relative: const Offset(1, 200),
           ),
         ],
       ),
