@@ -59,7 +59,7 @@ class _AnimationScreen2State extends State<AnimationScreen2> {
             bottom: 0,
             right: 8,
             child: LottieAnimationWidget(
-              assetName: 'assets/falling2.json',
+              assetName: 'assets/falling.json',
               width: 50,
               height: 50,
               begin: Offset(0.0, -0.9),

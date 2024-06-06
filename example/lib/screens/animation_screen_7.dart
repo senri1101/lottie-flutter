@@ -4,18 +4,14 @@ import 'package:lottie/lottie.dart';
 /// This example shows how to play the animation between two markers.
 /// It is based on this article for lottie-ios:
 /// https://medium.com/swlh/controlling-lottie-animation-with-markers-5e9035d94623
-void main() async {
-  runApp(const App());
-}
-
-class App extends StatefulWidget {
-  const App({super.key});
+class AnimationScreen7 extends StatefulWidget {
+  const AnimationScreen7({super.key});
 
   @override
-  State<App> createState() => _AppState();
+  State<AnimationScreen7> createState() => _AnimationScreen7State();
 }
 
-class _AppState extends State<App> with TickerProviderStateMixin {
+class _AnimationScreen7State extends State<AnimationScreen7> with TickerProviderStateMixin {
   late final Future<LottieComposition> _composition;
 
   @override
@@ -26,20 +22,17 @@ class _AppState extends State<App> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Markers'),
-        ),
-        body: FutureBuilder<LottieComposition>(
-          future: _composition,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) return ErrorWidget(snapshot.error!);
-            if (!snapshot.hasData) return const CircularProgressIndicator();
-            return _LottieDetails(snapshot.data!);
-          },
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Animation 7'),
+      ),
+      body: FutureBuilder<LottieComposition>(
+        future: _composition,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) return ErrorWidget(snapshot.error!);
+          if (!snapshot.hasData) return const CircularProgressIndicator();
+          return _LottieDetails(snapshot.data!);
+        },
       ),
     );
   }
@@ -54,8 +47,7 @@ class _LottieDetails extends StatefulWidget {
   _LottieDetailsState createState() => _LottieDetailsState();
 }
 
-class _LottieDetailsState extends State<_LottieDetails>
-    with TickerProviderStateMixin {
+class _LottieDetailsState extends State<_LottieDetails> with TickerProviderStateMixin {
   late final AnimationController _controller;
 
   @override
@@ -102,10 +94,8 @@ class _LottieDetailsState extends State<_LottieDetails>
         for (var marker in widget.composition.markers)
           ListTile(
             title: Text(marker.name),
-            subtitle: Text(
-                '${marker.startFrame.toStringAsFixed(1)} ${marker.durationFrames.toStringAsFixed(1)}'),
-            trailing: Text(
-                '[${marker.start.toStringAsFixed(2)}-${marker.end.toStringAsFixed(2)}]'),
+            subtitle: Text('${marker.startFrame.toStringAsFixed(1)} ${marker.durationFrames.toStringAsFixed(1)}'),
+            trailing: Text('[${marker.start.toStringAsFixed(2)}-${marker.end.toStringAsFixed(2)}]'),
           ),
       ],
     );
@@ -116,7 +106,6 @@ class _LottieDetailsState extends State<_LottieDetails>
     var end = widget.composition.getMarker(marker2)!.start;
 
     _controller.value = start;
-    _controller.animateTo(end,
-        duration: widget.composition.duration * (end - start).abs());
+    _controller.animateTo(end, duration: widget.composition.duration * (end - start).abs());
   }
 }
