@@ -9,18 +9,31 @@ class AnimationScreen1 extends StatefulWidget {
 }
 
 class _AnimationScreen1State extends State<AnimationScreen1> with TickerProviderStateMixin {
-  late final AnimationController _controller;
-  bool isTapped = false;
+  late final AnimationController _controllerCheckOn;
+  late final AnimationController _controllerCheckOff;
+  late final AnimationController _controllerPostmenuOn;
+  late final AnimationController _controllerPostmenuOff;
+
+  bool isCheckOnTapped = false;
+  bool isCheckOffTapped = false;
+  bool isPostmenuOnTapped = false;
+  bool isPostmenuOffTapped = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    _controllerCheckOn = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _controllerCheckOff = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _controllerPostmenuOn = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _controllerPostmenuOff = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controllerCheckOn.dispose();
+    _controllerCheckOff.dispose();
+    _controllerPostmenuOn.dispose();
+    _controllerPostmenuOff.dispose();
     super.dispose();
   }
 
@@ -30,26 +43,83 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
       appBar: AppBar(
         title: const Text('Animation 1'),
       ),
-      floatingActionButton: InkWell(
-        enableFeedback: false,
-        onTap: () async {
-          if (isTapped) {
-            _controller.forward();
-          } else {
-            _controller.reverse();
-          }
-          setState(() {
-            isTapped = !isTapped;
-          });
-        },
-        child: Lottie.asset(
-          'assets/chack_on.json',
-          controller: _controller,
-        ),
-      ),
       body: ListView(
         children: [
           Lottie.asset('assets/check.json'),
+          InkWell(
+            enableFeedback: false,
+            onTap: () async {
+              if (isCheckOnTapped) {
+                await _controllerCheckOn.forward();
+              } else {
+                await _controllerCheckOn.reverse();
+              }
+              setState(() {
+                isCheckOnTapped = !isCheckOnTapped;
+              });
+            },
+            child: Lottie.asset(
+              'assets/check_on.json',
+              controller: _controllerCheckOn,
+            ),
+          ),
+          InkWell(
+            enableFeedback: false,
+            onTap: () async {
+              if (isCheckOffTapped) {
+                await _controllerCheckOff.forward();
+              } else {
+                await _controllerCheckOff.reverse();
+              }
+              setState(() {
+                isCheckOffTapped = !isCheckOffTapped;
+              });
+            },
+            child: Lottie.asset(
+              'assets/check_off.json',
+              controller: _controllerCheckOff,
+            ),
+          ),
+          Container(
+            color: Colors.blue,
+            child: InkWell(
+              enableFeedback: false,
+              onTap: () async {
+                if (isPostmenuOnTapped) {
+                  await _controllerPostmenuOn.forward();
+                } else {
+                  await _controllerPostmenuOn.reverse();
+                }
+                setState(() {
+                  isPostmenuOnTapped = !isPostmenuOnTapped;
+                });
+              },
+              child: Lottie.asset(
+                'assets/postmenu_on.json',
+                controller: _controllerPostmenuOn,
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.blue,
+            child: InkWell(
+              enableFeedback: false,
+              onTap: () async {
+                if (isPostmenuOffTapped) {
+                  await _controllerPostmenuOff.forward();
+                } else {
+                  await _controllerPostmenuOff.reverse();
+                }
+                setState(() {
+                  isPostmenuOffTapped = !isPostmenuOffTapped;
+                });
+              },
+              child: Lottie.asset(
+                'assets/postmenu_off.json',
+                controller: _controllerPostmenuOff,
+              ),
+            ),
+          ),
         ],
       ),
     );

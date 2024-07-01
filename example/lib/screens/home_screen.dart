@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AnimationScreen1())),
                   child: const Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('1.ボタンのアニメーション'),
+                    child: Text('1.ボタンのアニメーション Designed by Mr. Nabesuke'),
                   ),
                 ),
                 const SizedBox(height: 16), // ボタン間の余白を追加
