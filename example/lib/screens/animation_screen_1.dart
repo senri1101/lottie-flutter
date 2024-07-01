@@ -13,11 +13,13 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
   late final AnimationController _controllerCheckOff;
   late final AnimationController _controllerPostmenuOn;
   late final AnimationController _controllerPostmenuOff;
+  late final AnimationController _controllerHamburgerOn;
 
   bool isCheckOnTapped = true;
   bool isCheckOffTapped = true;
   bool isPostmenuOnTapped = true;
   bool isPostmenuOffTapped = true;
+  bool isHamburgerOnTapped = true;
 
   @override
   void initState() {
@@ -26,6 +28,7 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
     _controllerCheckOff = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
     _controllerPostmenuOn = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
     _controllerPostmenuOff = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _controllerHamburgerOn = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
   }
 
   @override
@@ -34,6 +37,7 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
     _controllerCheckOff.dispose();
     _controllerPostmenuOn.dispose();
     _controllerPostmenuOff.dispose();
+    _controllerHamburgerOn.dispose();
     super.dispose();
   }
 
@@ -49,7 +53,6 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
           InkWell(
             enableFeedback: false,
             onTap: () async {
-              print('tap');
               if (isCheckOnTapped) {
                 await _controllerCheckOn.forward();
               } else {
@@ -67,7 +70,6 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
           InkWell(
             enableFeedback: false,
             onTap: () async {
-              print('tap');
               if (isCheckOffTapped) {
                 await _controllerCheckOff.forward();
               } else {
@@ -87,7 +89,6 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
             child: InkWell(
               enableFeedback: false,
               onTap: () async {
-                print('tap');
                 if (isPostmenuOnTapped) {
                   await _controllerPostmenuOn.forward();
                 } else {
@@ -108,7 +109,6 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
             child: InkWell(
               enableFeedback: false,
               onTap: () async {
-                print('tap');
                 if (isPostmenuOffTapped) {
                   await _controllerPostmenuOff.forward();
                 } else {
@@ -121,6 +121,26 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
               child: Lottie.asset(
                 'assets/postmenu_off.json',
                 controller: _controllerPostmenuOff,
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.blue,
+            child: InkWell(
+              enableFeedback: false,
+              onTap: () async {
+                if (isHamburgerOnTapped) {
+                  await _controllerHamburgerOn.forward();
+                } else {
+                  await _controllerHamburgerOn.reverse();
+                }
+                setState(() {
+                  isHamburgerOnTapped = !isHamburgerOnTapped;
+                });
+              },
+              child: Lottie.asset(
+                'assets/hamburger_on.json',
+                controller: _controllerHamburgerOn,
               ),
             ),
           ),
