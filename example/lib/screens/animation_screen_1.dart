@@ -14,10 +14,10 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
   late final AnimationController _controllerPostmenuOn;
   late final AnimationController _controllerPostmenuOff;
 
-  bool isCheckOnTapped = false;
-  bool isCheckOffTapped = false;
-  bool isPostmenuOnTapped = false;
-  bool isPostmenuOffTapped = false;
+  bool isCheckOnTapped = true;
+  bool isCheckOffTapped = true;
+  bool isPostmenuOnTapped = true;
+  bool isPostmenuOffTapped = true;
 
   @override
   void initState() {
@@ -49,6 +49,7 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
           InkWell(
             enableFeedback: false,
             onTap: () async {
+              print('tap');
               if (isCheckOnTapped) {
                 await _controllerCheckOn.forward();
               } else {
@@ -66,6 +67,7 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
           InkWell(
             enableFeedback: false,
             onTap: () async {
+              print('tap');
               if (isCheckOffTapped) {
                 await _controllerCheckOff.forward();
               } else {
@@ -85,6 +87,7 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
             child: InkWell(
               enableFeedback: false,
               onTap: () async {
+                print('tap');
                 if (isPostmenuOnTapped) {
                   await _controllerPostmenuOn.forward();
                 } else {
@@ -105,6 +108,7 @@ class _AnimationScreen1State extends State<AnimationScreen1> with TickerProvider
             child: InkWell(
               enableFeedback: false,
               onTap: () async {
+                print('tap');
                 if (isPostmenuOffTapped) {
                   await _controllerPostmenuOff.forward();
                 } else {
